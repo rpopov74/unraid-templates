@@ -1,1 +1,27 @@
-
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Zettelrobbe</Name>
+  <Repository>admonstrator/zettelrobbe:latest</Repository>
+  <Registry>https://hub.docker.com/r/admonstrator/zettelrobbe</Registry>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/admonstrator/zettelrobbe/issues</Support>
+  <Project>https://zettelrob.be</Project>
+  <ReadMe>https://github.com/admonstrator/zettelrobbe#readme</ReadMe>
+  <DonateLink>https://github.com/sponsors/admonstrator</DonateLink>
+  <Overview>Automatically tag, sort, and search your Paperless-ngx documents – using local or hosted AI.&#xD;
+Tagging IA fiable, OCR rescue queue (Mistral ou modeles vision locaux, PDF multi-pages), files failed/ignored, historique rescan, MFA, setup guide, custom fields enrichis.&#xD;
+&#xD;
+Configuration initiale via le wizard web au premier lancement (URL Paperless-ngx, token API, provider LLM/OCR).</Overview>
+  <Category>Productivity: Tools: AI:</Category>
+  <WebUI>http://[IP]:[PORT:3000]/</WebUI>
+  <Icon>https://raw.githubusercontent.com/admonstrator/zettelrobbe/main/favicon.png</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <TemplateURL>https://raw.githubusercontent.com/rpopov74/unraid-templates/main/zettelrobbe/zettelrobbe.xml</TemplateURL>
+  <Date>2026-08-05</Date>
+  <Config Name="WebUI Port" Target="3000" Default="3000" Mode="tcp" Type="Port" Display="always" Required="true" Description="Port hote pour l'interface web (container: 3000)">3000</Config>
+  <Config Name="Data" Target="/app/data" Default="/mnt/user/appdata/zettelrobbe" Mode="rw" Type="Path" Display="always" Required="true" Description="Base SQLite, config et etat de l'application">/mnt/user/appdata/zettelrobbe</Config>
+  <Config Name="COOKIE_SECURE_MODE" Target="COOKIE_SECURE_MODE" Default="never" Type="Variable" Display="always" Required="true" Description="'never' pour acces HTTP LAN. Passer en 'auto' derriere un reverse proxy HTTPS (Cloudflare Tunnel)">never</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Zurich" Type="Variable" Display="advanced" Required="false" Description="Fuseau horaire">Europe/Zurich</Config>
+</Container>
