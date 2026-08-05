@@ -24,4 +24,5 @@ Configuration initiale via le wizard web au premier lancement (URL Paperless-ngx
   <Config Name="Data" Target="/app/data" Default="/mnt/user/appdata/zettelrobbe" Mode="rw" Type="Path" Display="always" Required="true" Description="Base SQLite, config et etat de l'application">/mnt/user/appdata/zettelrobbe</Config>
   <Config Name="COOKIE_SECURE_MODE" Target="COOKIE_SECURE_MODE" Default="never" Type="Variable" Display="always" Required="true" Description="'never' pour acces HTTP LAN. Passer en 'auto' derriere un reverse proxy HTTPS (Cloudflare Tunnel)">never</Config>
   <Config Name="TZ" Target="TZ" Default="Europe/Zurich" Type="Variable" Display="advanced" Required="false" Description="Fuseau horaire">Europe/Zurich</Config>
+  <Config Name="ALLOW_REMOTE_SETUP" Target="ALLOW_REMOTE_SETUP" Default="yes" Type="Variable" Display="always" Required="false" Description="Autorise l'acces au wizard de setup depuis le LAN (le setup n'est accessible que depuis localhost par defaut). Remettre a 'no' apres la configuration initiale.">yes</Config>
 </Container>
