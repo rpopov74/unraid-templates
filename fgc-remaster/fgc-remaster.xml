@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>FGC-Remaster</Name>
+  <Repository>ghcr.io/p-adamiec/free-games-claimer-remaster:latest</Repository>
+  <Registry>https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/pkgs/container/free-games-claimer-remaster</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/issues</Support>
+  <Project>https://github.com/P-Adamiec/Free-Games-Claimer-Remaster</Project>
+  <Overview>Remaster Python de free-games-claimer. Claim automatique des jeux gratuits (Epic, Prime Gaming, GOG, Steam, Ubisoft, AliExpress). Scheduler intégré, login initial via noVNC (port 7080), notifications Discord/Apprise.</Overview>
+  <Category>Tools: Other</Category>
+  <WebUI>http://[IP]:[PORT:7080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/rpopov74/unraid-templates/main/fgc-remaster/fgc-remaster.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/P-Adamiec/Free-Games-Claimer-Remaster/main/logo.png</Icon>
+  <ExtraParams>--shm-size=1g --memory=1024m</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+
+  <!-- Ports / Volumes -->
+  <Config Name="noVNC Web UI" Target="7080" Default="7080" Mode="tcp" Description="Port noVNC pour le login initial via navigateur" Type="Port" Display="always" Required="true" Mask="false">7080</Config>
+  <Config Name="Data" Target="/fgc/data" Default="/mnt/user/appdata/fgc-remaster" Mode="rw" Description="DB SQLite, profils Chrome par store, screenshots" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/fgc-remaster</Config>
+
+  <!-- Général -->
+  <Config Name="TZ" Target="TZ" Default="Europe/Zurich" Mode="" Description="Timezone du conteneur" Type="Variable" Display="always" Required="false" Mask="false">Europe/Zurich</Config>
+  <Config Name="STORES" Target="STORES" Default="" Mode="" Description="Stores à activer, séparés par virgules (vide = tous)" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="VNC_IP" Target="VNC_IP" Default="localhost" Mode="" Description="Hôte utilisé dans les liens de notification (IP Unraid ou IP Tailscale)" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="VNC_PASSWORD" Target="VNC_PASSWORD" Default="" Mode="" Description="Mot de passe VNC" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="SHOW" Target="SHOW" Default="1" Mode="" Description="Affiche le navigateur via VNC (1/0)" Type="Variable" Display="advanced" Required="false" Mask="false">1</Config>
+
+  <!-- Scheduler -->
+  <Config Name="SCHEDULER_HOURS" Target="SCHEDULER_HOURS" Default="12" Mode="" Description="Intervalle en heures entre deux runs" Type="Variable" Display="always" Required="false" Mask="false">12</Config>
+  <Config Name="SCHEDULER_FIXED_TIMES" Target="SCHEDULER_FIXED_TIMES" Default="" Mode="" Description="Heures fixes quotidiennes HH:MM séparées par virgules (ex: 17:00,21:30)" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="SCHEDULER_TIMEZONE" Target="SCHEDULER_TIMEZONE" Default="Europe/Zurich" Mode="" Description="Timezone IANA pour SCHEDULER_FIXED_TIMES" Type="Variable" Display="advanced" Required="false" Mask="false">Europe/Zurich</Config>
+
+  <!-- Credentials -->
+  <Config Name="EG_EMAIL" Target="EG_EMAIL" Default="" Mode="" Description="Epic Games email" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="EG_PASSWORD" Target="EG_PASSWORD" Default="" Mode="" Description="Epic Games password" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="EG_OTP_KEY" Target="EG_OTP_KEY" Default="" Mode="" Description="Epic Games clé TOTP (2FA)" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="PG_EMAIL" Target="PG_EMAIL" Default="" Mode="" Description="Prime Gaming (Amazon) email" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="PG_PASSWORD" Target="PG_PASSWORD" Default="" Mode="" Description="Prime Gaming (Amazon) password" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="PG_OTP_KEY" Target="PG_OTP_KEY" Default="" Mode="" Description="Prime Gaming clé TOTP (2FA)" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="GOG_EMAIL" Target="GOG_EMAIL" Default="" Mode="" Description="GOG email" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="GOG_PASSWORD" Target="GOG_PASSWORD" Default="" Mode="" Description="GOG password" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="GOG_OTP_KEY" Target="GOG_OTP_KEY" Default="" Mode="" Description="GOG clé TOTP (2FA)" Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="STEAM_USERNAME" Target="STEAM_USERNAME" Default="" Mode="" Description="Steam username" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="STEAM_PASSWORD" Target="STEAM_PASSWORD" Default="" Mode="" Description="Steam password" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="UBI_EMAIL" Target="UBI_EMAIL" Default="" Mode="" Description="Ubisoft Connect email" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="UBI_PASSWORD" Target="UBI_PASSWORD" Default="" Mode="" Description="Ubisoft Connect password" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="UBI_OTP_KEY" Target="UBI_OTP_KEY" Default="" Mode="" Description="Ubisoft clé TOTP (2FA)" Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="AE_EMAIL" Target="AE_EMAIL" Default="" Mode="" Description="AliExpress email" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="AE_PASSWORD" Target="AE_PASSWORD" Default="" Mode="" Description="AliExpress password" Type="Variable" Display="advanced" Required="false" Mask="true"/>
+
+  <!-- Notifications -->
+  <Config Name="DISCORD_WEBHOOK" Target="DISCORD_WEBHOOK" Default="" Mode="" Description="Webhook Discord" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="NOTIFY" Target="NOTIFY" Default="" Mode="" Description="URL(s) Apprise (Telegram, ntfy...), séparées par virgules" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="NOTIFY_ALREADY_CLAIMED" Target="NOTIFY_ALREADY_CLAIMED" Default="false" Mode="" Description="Inclure les jeux déjà claim dans le récap" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+
+  <!-- Debug -->
+  <Config Name="DEBUG" Target="DEBUG" Default="false" Mode="" Description="Logs verbeux" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="DRYRUN" Target="DRYRUN" Default="false" Mode="" Description="Simule un run sans claim réel" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+</Container>
