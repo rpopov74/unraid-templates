@@ -14,7 +14,7 @@
   <WebUI>http://[IP]:[PORT:7080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/rpopov74/unraid-templates/main/fgc-remaster/fgc-remaster.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/P-Adamiec/Free-Games-Claimer-Remaster/main/logo.png</Icon>
-  <ExtraParams>--shm-size=1g --memory=1024m</ExtraParams>
+  <ExtraParams>--shm-size=1g --memory=2048m</ExtraParams>
   <PostArgs/>
   <CPUset/>
   <DonateText/>
