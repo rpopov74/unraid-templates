@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Actual-Budget</Name>
+  <Repository>actualbudget/actual-server:latest</Repository>
+  <Registry>https://hub.docker.com/r/actualbudget/actual-server</Registry>
+  <Network>bridge</Network>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/actualbudget/actual/issues</Support>
+  <Project>https://actualbudget.org</Project>
+  <ReadMe>https://actualbudget.org/docs/config/</ReadMe>
+  <DonateLink>https://opencollective.com/actual</DonateLink>
+  <Overview>Actual Budget : gestion de budget local-first (envelope budgeting), sync multi-appareils, import bancaire (GoCardless / SimpleFIN).&#xD;
+&#xD;
+IMPORTANT : le client web exige un contexte securise (HTTPS ou localhost). En HTTP via l'IP LAN, l'app refuse de charger le budget. Passer par un reverse proxy HTTPS (Cloudflare Tunnel) ou fournir un certificat via ACTUAL_HTTPS_KEY / ACTUAL_HTTPS_CERT.</Overview>
+  <Category>Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:5006]/</WebUI>
+  <Icon>https://raw.githubusercontent.com/actualbudget/actual/master/packages/desktop-client/public/android-chrome-512x512.png</Icon>
+  <ExtraParams>--restart=unless-stopped --memory=512m --health-cmd="node scripts/health-check.js" --health-interval=60s --health-timeout=10s --health-retries=3 --health-start-period=20s</ExtraParams>
+  <TemplateURL>https://raw.githubusercontent.com/rpopov74/unraid-templates/main/actual-budget/actual-budget.xml</TemplateURL>
+  <Date>2026-09-26</Date>
+  <Config Name="WebUI Port" Target="5006" Default="5006" Mode="tcp" Type="Port" Display="always" Required="true" Description="Port hote pour l'interface web (container: 5006)">5006</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/actual-budget" Mode="rw" Type="Path" Display="always" Required="true" Description="server-files (account.sqlite) et user-files (budgets)">/mnt/user/appdata/actual-budget</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Zurich" Type="Variable" Display="advanced" Required="false" Description="Fuseau horaire">Europe/Zurich</Config>
+  <Config Name="ACTUAL_LOGIN_METHOD" Target="ACTUAL_LOGIN_METHOD" Default="password|header|openid" Type="Variable" Display="advanced" Required="false" Description="Methode d'authentification (password par defaut)">password</Config>
+  <Config Name="ACTUAL_UPLOAD_FILE_SYNC_SIZE_LIMIT_MB" Target="ACTUAL_UPLOAD_FILE_SYNC_SIZE_LIMIT_MB" Default="20" Type="Variable" Display="advanced" Required="false" Description="Taille max d'un fichier de sync (MB)">20</Config>
+  <Config Name="ACTUAL_UPLOAD_SYNC_ENCRYPTED_FILE_SYNC_SIZE_LIMIT_MB" Target="ACTUAL_UPLOAD_SYNC_ENCRYPTED_FILE_SYNC_SIZE_LIMIT_MB" Default="50" Type="Variable" Display="advanced" Required="false" Description="Taille max d'un fichier de sync chiffre E2E (MB)">50</Config>
+  <Config Name="ACTUAL_UPLOAD_FILE_SIZE_LIMIT_MB" Target="ACTUAL_UPLOAD_FILE_SIZE_LIMIT_MB" Default="20" Type="Variable" Display="advanced" Required="false" Description="Taille max d'import de fichier (MB)">20</Config>
+</Container>
